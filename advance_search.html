@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Advance Search</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h3><b>Advance Search</b></h3>
+    <hr/>
+    <div class="outer">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-xs-12 col-md-2"><b>Find result</b></div>
+            <div class="col-xs-12 col-md-3">with <b>all</b> of the words</div>
+            <div class="col-xs-12 col-md-2">
+                <input type="text" id="text_search">
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <select name="results" id="results">
+                    <option selected>10 results</option>
+                    <option>20 results</option>
+                    <option>30 results</option>
+                    <option>50 results</option>
+                    <option>100 results</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <label for="search_in"> ค้นหาใน : </label>
+                <select name="search_in" id="search_in">
+                    <option selected>ชื่อเรื่อง</option>
+                    <option>ผู้แต่ง</option>
+                    <option>หัวเรื่อง</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-1">
+                <input type="submit" id="btnSearch" value="LIRT Search">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-3">with the <b>exact phrase</b></div>
+            <div class="col-xs-12 col-md-2">
+                <input type="text" id="text_search">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-3">with <b>at least one</b> of the words</div>
+            <div class="col-xs-12 col-md-2">
+                <input type="text" id="text_search">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-3"><b>without</b> the words</div>
+            <div class="col-xs-12 col-md-2">
+                <input type="text" id="text_search">
+            </div>
+        </div>
+        <div class="inner">
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><b>Language</b></div>
+                <div class="col-xs-12 col-md-3">Return pages written in</div>
+                <div class="col-xs-12 col-md-2"></div>
+                <div class="col-xs-12 col-md-2">
+                    <select name="language" id="language">
+                        <option selected>any language</option>
+                        <option>Thai</option>
+                        <option>English</option>
+                        <option>Chinese</option>
+                        <option>Japanese</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><b>File Format</b></div>
+                <div class="col-xs-12 col-md-3">
+                    <select name="file_format" id="file_format">
+                        <option selected>Only</option>
+                        <option>Don't</option>
+                    </select>
+                    return results of the file format
+                </div>
+                <div class="col-xs-12 col-md-2"></div>
+                <div class="col-xs-12 col-md-2">
+                    <select name="format" id="format">
+                        <option selected>any format</option>
+                        <option>.pdf</option>
+                        <option>.ps</option>
+                        <option>.doc</option>
+                        <option>.xls</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><b>Occurrences</b></div>
+                <div class="col-xs-12 col-md-3">Return results where my terms occur</div>
+                <div class="col-xs-12 col-md-2"></div>
+                <div class="col-xs-12 col-md-2">
+                    <select name="format" id="format">
+                        <option selected>anywhere in the page</option>
+                        <option>in the title of the page</option>
+                        <option>in the URL of the page</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><b>Domain</b></div>
+                <div class="col-xs-12 col-md-3">
+                    <select name="domain" id="domain">
+                        <option selected>Only</option>
+                        <option>Don't</option>
+                    </select>
+                    return results from the site or domain
+                </div>
+                <div class="col-xs-12 col-md-2"></div>
+                <div class="col-xs-12 col-md-2">
+                    <input type="text" id="url" class="box" placeholder="e.g. google.com, .org">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><b>Sort</b></div>
+                <div class="col-xs-12 col-md-3">
+                    <select name="domain" id="domain">
+                        <option selected>Sort by relevance</option>
+                        <option>Sort by date</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3><b>Page-Specific Search</b></h3>
+    <div class="inner" style="margin-bottom:15px;">
+        <div class="row">
+            <div class="col-xs-12 col-md-2"><b>Links</b></div>
+            <div class="col-xs-12 col-md-3">Find pages that link to the page</div>
+            <div class="col-xs-12 col-md-2"></div>
+            <div class="col-xs-12 col-md-3">
+                <input type="text" name="search_url" id="search_url">
+                <input type="submit" value="LIRT Search">
+            </div>
+        </div>
+    </div>
+    <a href="search.html"><< Back</a>
+</body>
+
+</html>
