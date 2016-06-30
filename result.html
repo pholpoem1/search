@@ -3,54 +3,270 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Result Search</title>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="js/js.inc.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <div class="main" style="padding-top:30px;">
-        <form id="search" name="search">
-            <input type="text" id="text_search2" name="text_search2" class="box">
-            <label for="search_in"> ค้นหาใน : </label>
-            <select name="search_in" id="search_in">
-                <option selected>ชื่อเรื่อง</option>
-                <option>ผู้แต่ง</option>
-                <option>หัวเรื่อง</option>
-            </select>
-            <input type="submit" id="btnSearch2" value="LIRT Search">
-        </form>
-        <div id="advance"><a href="#" id="load_advance">Advance Search</a></div>
-    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="advance_search.html">Advance Search</a>
+                    </li>
+                </ul>
 
-    <div class="result">
-        <div class="row">
-            <div class="col-xs-6">
-                <h3><b>Search</b></h3>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <select class="form-control" id="select">
+                            <option selected>ชื่อเรื่อง</option>
+                            <option>ผู้แต่ง</option>
+                            <option>หัวเรื่อง</option>
+                        </select>
+                        <button type="submit" class="btn btn-warning">LIRT search</button>
+                    </div>
+                </form>
             </div>
-            <div class="col-xs-6 summary">
-                LIRT Results <b>1 - 10</b> of about <b>37400</b> for <b style="color:rgb(0, 0, 255); font-size:large;">Word</b>. Search took <b>0.61</b> seconds.
+            <!--id="navbar-main-->
+        </div>
+        <!--container-->
+    </div>
+    <!--navbar navbar-inverse navbar-fixed-top-->
+
+    <div class="container-fluid" id="all">
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-8 col-sm-offset-2" style="padding:0 100px 0 95px;">
+                LIRT Results <b>1 - 10</b> of about <b>37400</b> for <b style="color:blue; font-size:large;">Word</b>. Search took <b>0.61</b> seconds.
+            </div>
+
+            <div class="col-xs-6 col-sm-2" style="padding:0 0 0 40px;">
+                Sort by date / Sort by relevance
+            </div>
+
+        </div>
+
+        <div class="clearfix visible-xs-block"></div>
+
+        <div class="col-xs-12 col-sm-2 sidebar">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">จำกัดการสืบค้น</h3>
+                </div>
+                <div class="panel-body">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="well well-sm">
+                                ผู้แต่ง <span class="glyphicon glyphicon-search" id="author" title="click here to search"></span>
+                                <div class="_panel" id="author_panel">
+                                    <input placeholder="search..." class="search_item" />
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="list-group-item">
+                                    <span class="badge">> 350</span>
+                                    <a href="javascript:void(0)" onclick="refhesh_attr('บรรณาธิการ','editor');" id="editor-glyphicon" class="display">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                    <a id="editor" href="javascript:void(0)" onclick="remove_attr('บรรณาธิการ','editor');">บรรณาธิการ</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 250</span>
+                                    <a href="javascript:void(0)" onclick="refhesh_attr('ผู้แปล','translator');" id="translator-glyphicon" class="display">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                    <a id="translator" href="javascript:void(0)" onclick="remove_attr('ผู้แปล','translator');">ผู้แปล</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 110</span> <a href="#">สำนักงานเลขาธิการสภาผู้แทนราษฎร</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 100</span> <a href="#">ผู้เรียบเรียง</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 63</span> <a href="#">ผู้รวบรวม</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="well well-sm" id="years">
+                                ปีที่พิมพ์ <span class="glyphicon glyphicon-search"></span>
+                                <div class="_panel" id="years_panel">
+                                    <input placeholder="search..." class="search_item" />
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="list-group-item">
+                                    <span class="badge">> 100</span> <a href="#">2551 - ปัจจุบัน</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 120</span> <a href="#">2541 - 2550</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 50</span> <a href="#">2531 - 2540</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 35</span> <a href="#">2521 - 2530</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="well well-sm" id="title">
+                                หัวเรื่อง <span class="glyphicon glyphicon-search"></span>
+                                <div class="_panel" id="title_panel">
+                                    <input placeholder="search..." class="search_item" />
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="list-group-item">
+                                    <span class="badge">> 220</span> <a href="#">ประวัติศาสตร์ไทย</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 94</span> <a href="#">การเมืองและการปกครอง</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 70</span> <a href="#">รัฐธรรมนูญ</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 59</span> <a href="#">ร่างรัฐธรรมนูญแห่งราชอาณาจักรไทย</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 58</span> <a href="#">อาเซียน</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="well well-sm" id="type_doc">
+                                ประเภทเอกสาร <span class="glyphicon glyphicon-search"></span>
+                                <div class="_panel" id="typeDoc_panel">
+                                    <input placeholder="search..." class="search_item" />
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="list-group-item">
+                                    <span class="badge">> 230</span> <a href="#">รายงานการประชุมพฤฒสภา/วุฒิสภา(เล่ม)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 230</span> <a href="#">รายงานการประชุมสภาผู้แทนราษฎร(เล่ม)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">> 190</span> <a href="#">คำวินิจฉัย</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
         </div>
-        <hr/>
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-2 sidebar">
-                <div class="heading">จำกัดการสืบค้น</div>
-                <ul>ผู้แต่ง</ul>
-                พราะคนเราไม่ได้รวยล้นฟ้า และคนจำนวนมากที่ไม่ได้ใช้รถคันเดียวไปตลอดชีวิต คุณซื้อรถมาคันนึง ใช้งานไปสัก5-10ปี เริ่มเก่า ต้องซ่อมบำรุงมากขึ้น หรือเสียจุกจิกความเชื่อถือต่ำลง หรือความต้องการเปลี่ยน เช่นต้องการรถขนาดใหญ่ขึ้นเพื่อรองรับครอบครัวที่ใหญ่ขึ้น ต้องการรถกระบะเพื่อขนสินค้าเกษตรตัวเอง
-                ฯลฯ ทุกสาเหตุเหล่านี้เป็นปัจจัยที่ทำให้คนจำนวนมากต้อง"เปลี่ยนรถ"และในเวลาที่จำเป็นต้องเปลี่ยน รถคันเก่า ก็คือทุนในการซื้อรถคันใหม่ โดยอาจจะเป็นเงินดาวน์ หรือแม้แต่เงินก้อน เพื่อซื้อคันใหม่ ทีนี้แหละ มูลค่าของรถที่ได้ ที่แตกต่างไปตามความต้องการของท้องตลาด
-                ก็ทำให้"ทุน"ของคุณแตกต่างกัน บางคนบอกต่างไม่มาก แต่ผมจะยกตัวอย่างรถคู่นึงโดยไม่ระบุชื่อยี่ห้อตรงๆ ตอนมือหนึ่งออกมาราคาพอๆกันคือราวๆแปดแสน แต่พอผ่านไปห้าปี คันนึงมือสองราคาราวๆ สี่ถึงห้าแสน แต่อีกคันนึงเหลือแค่ไม่ถึงสามแสน แถมบางเต็นท์ยังไม่รับเข้าเสียอีก
-                ส่วนต่างเงินสองแสนกว่าๆสำหรับบางคนอาจจะน้อย แต่สำหรับคนจำนวนมากที่มีงบแค่พอซื้อรถราคาประมาณนี้ ก็ถือว่ามากน่าดูเลยล่ะ แต่นั่นแหละ แต่ละคนอาจมีปัจจัยความต้องการแตกต่างกัน บางคนซื้อคันใหม่โดยไม่ขายคันเก่า เก็บไว้เป็นรถสำรอง จอดโชว์ในโรงรถไว้รำลึกความหลังมันก็มี
-                หรือบางคนเปลี่ยนรถทุกๆ3-5ปีขาดทุนหลายแสน ก็ไม่สนใจ เพราะมีเงินมีรายได้มาก ซื้อรถตามความสุนทรีย์ อันนี้ก็อาจเป็นข้อยกเว้นไป แต่คนส่วนใหญ่ล่ะ เขาจะคิดแบบไหน? เชื่อเถอะครับว่า คุณไม่ได้ใช้รถคันเดียวไปชั่วชีวิตหรอก...
-            </div>
+        <div class="col-xs-12 col-sm-12 show_result">
+            <div class="container">
+                <ul class="breadcrumb" id="navigator">
+                    <li><a href="#">All result</a></li>
 
-            <div class="col-xs-12 col-sm-10 show_result" style="padding-left: 7px; padding-right: 0px;">
-              <div class="rs_bar"><a href="#" class="back_link">All results</a></div>
+                </ul>
+
+                <div class="col-xs-12 col-sm-10 result">
+                    <p><a href="#">เลือกตุลาการรัฐธรรมนูญจากผู้ทรงคุณวุฒิซึ่ง<b style="color:blue;">รัฐสภา</b> แต่งตั้ง จำนวน 4 ท่าน</a></p>
+                    <div class="detail">
+                        <p class="more_detail">
+                            ... เลือกตุลาการรัฐธรรมนูญจากผู้ทรงคุณวุฒิซึ่ง<b style="color:blue;">รัฐสภา</b> แต่งตั้ง จำนวน 4 ท่าน. LIRT คลังสารสนเทศของสถาบันนิติบัญญัติ. ... เลือกตุลาการรัฐธรรมนูญจาก ผู้ทรงคุณวุฒิซึ่งรัฐสภา แต่งตั้ง จำนวน 4 ท่าน. Date:
+                            ...
+                            <p class="collection">
+                                collection_name:ประกาศ ระเบียบ คำสั่ง
+                            </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-2">
+                    <img src="images/245059.jpg">
+                </div>
+
+                <div class="col-xs-12 col-sm-10 result">
+                    <p><a href="#">บันทึกการประชุมร่วมกันของ<b style="color:blue;">รัฐสภา</b> ครั้งที่ 1 (สมัยสามัญนิติบัญญัติ) วันศุกร์ที่ 16 กรกฎาคม พุทธศักราช 2542 ณ ตึกรัฐสภา</a></p>
+                    <div class="detail">
+                        <p class="more_detail">
+                            ... บันทึกการประชุมร่วมกันของ<b style="color:blue;">รัฐสภา</b> ครั้งที่ 1 (สมัยสามัญนิติบัญญัติ) วันศุกร์ที่ 16 กรกฎาคม พุทธศักราช 2542 ณ ตึกรัฐสภา. LIRT คลังสารสนเทศของสถาบันนิติบัญญัติ. ...
+                        </p>
+                        <p class="collection">
+                            collection_name:ประกาศ ระเบียบ คำสั่ง
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-2">
+                    <img src="images/245059.jpg">
+                </div>
+
+                <div class="col-xs-12 col-sm-10 result">
+                    <p><a href="#">เลือกตุลาการรัฐธรรมนูญจากผู้ทรงคุณวุฒิซึ่ง<b style="color:blue;">รัฐสภา</b> แต่งตั้ง จำนวน 4 ท่าน</a></p>
+                    <div class="detail">
+                        <p class="more_detail">
+                            ... เลือกตุลาการรัฐธรรมนูญจากผู้ทรงคุณวุฒิซึ่ง<b style="color:blue;">รัฐสภา</b> แต่งตั้ง จำนวน 4 ท่าน. LIRT คลังสารสนเทศของสถาบันนิติบัญญัติ. ... เลือกตุลาการรัฐธรรมนูญจาก ผู้ทรงคุณวุฒิซึ่งรัฐสภา แต่งตั้ง จำนวน 4 ท่าน. Date:
+                            ...
+                            <p class="collection">
+                                collection_name:ประกาศ ระเบียบ คำสั่ง
+                            </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-2">
+                    <img src="images/245059.jpg">
+                </div>
+
+                <div class="col-xs-12 col-sm-10 result">
+                    <p><a href="#">บันทึกการประชุมร่วมกันของ<b style="color:blue;">รัฐสภา</b> ครั้งที่ 1 (สมัยสามัญนิติบัญญัติ) วันศุกร์ที่ 16 กรกฎาคม พุทธศักราช 2542 ณ ตึกรัฐสภา</a></p>
+                    <div class="detail">
+                        <p class="more_detail">
+                            ... บันทึกการประชุมร่วมกันของ<b style="color:blue;">รัฐสภา</b> ครั้งที่ 1 (สมัยสามัญนิติบัญญัติ) วันศุกร์ที่ 16 กรกฎาคม พุทธศักราช 2542 ณ ตึกรัฐสภา. LIRT คลังสารสนเทศของสถาบันนิติบัญญัติ. ...
+                        </p>
+                        <p class="collection">
+                            collection_name:ประกาศ ระเบียบ คำสั่ง
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-2">
+                    <img src="images/245059.jpg">
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-sm-offset-3">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
+
+        <!--/div><row-->
     </div>
+    <!--id="all"-->
 </body>
 
 </html>
